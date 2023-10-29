@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Juego de Adivinanzas</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Juego de Adivinanzas</h1>
+
+    {% if message %}
+        <p style="color:{{ color }}">{{ message }}</p>
+    {% endif %}
+
+    {% if not color %}
+        <p>¡Bienvenido al Juego de Adivinanzas!</p>
+        <p>Adivina el número secreto entre 1 y 100. Tienes 5 intentos para adivinarlo.</p>
+    {% endif %}
+
+    <form method="post">
+        <input type="number" name="guessed_number" placeholder="Tu adivinanza" required>
+        <input type="submit" value="Adivinar">
+    </form>
+
+    {% if color in ["red", "blue"] %}
+        <form action="/" method="get">
+            <input type="submit" value="Jugar de nuevo" class="play-again">
+        </form>
+    {% endif %}
+
+    <a href="/winners">Ver Ganadores</a>
+</body>
+</html>
